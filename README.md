@@ -1,2 +1,3 @@
 # dotfiles
-Basic Config
+
+Personal repository containing my configured dotfiles

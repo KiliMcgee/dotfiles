@@ -1,0 +1,40 @@
+syntax on
+set background=dark
+filetype on
+filetype plugin indent on
+hi ColorColumn ctermbg=15
+set colorcolumn=80
+match ErrorMsg '\%>80v.\+'
+
+set autoindent
+set backspace=2
+set ruler
+set hlsearch
+set showcmd
+set showmatch
+set ignorecase
+set smartcase
+set incsearch
+set autowrite
+set number
+set expandtab
+set tabstop=4
+set shiftwidth=2
+set mouse=a
+set backupcopy=yes
+
+set laststatus=2
+set statusline=
+set statusline +=%5*%{&ff}\ %*          "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+
+hi User1 ctermfg=172 ctermbg=8
+hi User2 ctermfg=9 ctermbg=8
+hi User3 ctermfg=170  ctermbg=8
+hi User4 ctermfg=Yellow ctermbg=8
+hi User5 ctermfg=123 ctermbg=8
