@@ -1,3 +1,3 @@
 # dotfiles
 
-Personal repository containing my configured dotfiles
+These dotfiles are my personal various configurations.
