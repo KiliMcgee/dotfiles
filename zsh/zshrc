@@ -1,0 +1,58 @@
+export NVM_SYMLINK_CURRENT=true
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+############################ General Config ###################################
+
+# Set up the prompt and use modern completion systems
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz promptinit && promptinit
+
+# Recognize autocompletion of ../
+zstyle ':completion:*' special-dirs true
+
+setopt histignorealldups sharehistory
+
+# Keep 10000000 lines of history within the shell and save it to ~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=~/.zsh_history
+
+################################# ZSH PROMPT ##################################
+
+autoload -Uz vcs_info
+    precmd_vcs_info() {
+        vcs_info
+    }
+
+    prompt_git_info() {
+        [ ! -z "$vcs_info_msg_0_" ] && echo "($vcs_info_msg_0_)"
+    }
+
+    precmd_functions+=( precmd_vcs_info )
+    setopt prompt_subst
+    zstyle ':vcs_info:git:*' formats '%b'
+
+    RED="%F{red}"
+    GREEN="%F{green}"
+    YELLOW="%F{yellow}"
+    BLUE="%F{blue}"
+    RESET="%f"
+
+    GIT_PS1='$(prompt_git_info)'
+
+    PS1="$GREEN%n@%M$RESET: $YELLOW%~$RESET $GIT_PS1"$'\n'
+    if [[ $EUID == 0 ]]; then
+        PS1="$PS1"'# '
+    else
+        PS1="$PS1"'$ '
+    fi
+
+    unset color_prompt RED GREEN YELLOW BLUE RESET GIT_PS1
+
+###############################################################################
