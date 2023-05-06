@@ -1,0 +1,8 @@
+[user]
+	email = EMAIL
+[push]
+	default = simple
+[core]
+	autocrlf = input
+[fetch]
+	prune = true
