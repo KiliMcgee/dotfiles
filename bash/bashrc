@@ -1,0 +1,33 @@
+#!/bin/bash
+
+################################# BASH PROMPT ##################################
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
+    RED="\033[01;31m"
+    GREEN="\033[01;32m"
+    YELLOW="\033[00;33m"
+    BLUE="\033[01;34m"
+    RESET="\033[00m"
+
+    if [ -f "/etc/bash_completion.d/git-prompt" ]; then
+        # shellcheck disable=SC1091
+        . /etc/bash_completion.d/git-prompt
+        # shellcheck disable=SC2016
+        GIT_PS1='$(__git_ps1 "(%s)")'
+    else
+        GIT_PS1=""
+    fi
+
+    if [ "$color_prompt" = yes ]; then
+        PS1="\[$GREEN\]\u@\h\[$RESET\]: \[$YELLOW\]\w\[$RESET\] $GIT_PS1\n\$ "
+    else
+        PS1="\u@\h: \w $GIT_PS1\n\$ "
+    fi
+    unset color_prompt RED GREEN YELLOW BLUE RESET GIT_PS1
+
